@@ -3,17 +3,6 @@
 <head>
 	<title>Churn Prediction</title>
 	<style>
-		.container {
-			width: 900px;
-			height: 500px;
-			margin: 0 auto;
-			padding: 10px;
-			background-color: lightblue;
-			overflow: auto;
-			border: 1px solid #ccc;
-			border-radius: 10px;
-		}
-
 		input,
 		select,
 		option {
@@ -61,16 +50,6 @@
 			text-align: center;
 		}
 
-		/* .leftsection {
-			float: left;
-			width: 49%;
-		}
-
-		.rightsection {
-			float: right;
-			width: 49%;
-		} */
-
 		ul {
 			list-style-type: none;
 		}
@@ -91,6 +70,32 @@
 		h3 {
 			margin: 0px;
 		}
+
+		@media only screen and (min-width : 990px) {
+			.container {
+				width: 900px;
+				height: 500px;
+				margin: 0 auto;
+				padding: 10px;
+				background-color: lightblue;
+				overflow: auto;
+				border: 1px solid #ccc;
+				border-radius: 10px;
+			}
+
+		}
+
+		@media only screen and (max-width : 990px) {
+			.container {
+				width: 900px;
+				margin: 0 auto;
+				padding: 10px;
+				background-color: lightblue;				
+				border: 1px solid #ccc;
+				border-radius: 10px;
+			}
+
+		}
 	</style>
 
 </head>
@@ -100,215 +105,201 @@
 	<div class="container">
 		<p>Enter Data for Churn Prediction Insights</p>
 		<form action="{{ url_for('predict')}}" method="POST" id="churn">
-			<div class="leftsection">
-				<fieldset class="section1">
-					<legend>Personal Information</legend>
-					<div class="form-group">
-						<p>Are you Senior Citizen ? <span class="symbol">*</span></p>
-						<select name="Senior Citizen" required="required">
-							<option value="" disabled selected hidden>Select Option</option>
-							<option value="Yes">Yes</option>
-							<option value="No">No</option>
-						</select>
-					</div>
+			<fieldset class="section1">
+				<legend>Personal Information</legend>
+				<div class="form-group">
+					<p>Are you Senior Citizen ? <span class="symbol">*</span></p>
+					<select name="Senior Citizen" required="required">
+						<option value="" disabled selected hidden>Select Option</option>
+						<option value="Yes">Yes</option>
+						<option value="No">No</option>
+					</select>
+				</div>
 
-					<div class="form-group">
-						<p>Gender: <span class="symbol">*</span></p>
-						<select name="Gender" required="required">
-							<option value="" disabled selected hidden>Select Gender</option>
-							<option value="Male">Male</option>
-							<option value="Female">Female</option>
-						</select>
-					</div>
+				<div class="form-group">
+					<p>Gender: <span class="symbol">*</span></p>
+					<select name="Gender" required="required">
+						<option value="" disabled selected hidden>Select Gender</option>
+						<option value="Male">Male</option>
+						<option value="Female">Female</option>
+					</select>
+				</div>
 
-					<!-- <div class="form-group">
-						<label>Gender:</label><br>
-						<input type="radio" id="male" name="Gender" value="Male" required>
-						<label for="male">Male</label><br>
-						<input type="radio" id="female" name="Gender" value="Female" required>
-						<label for="female">Female</label><br>
-					</div> -->
+				<div class="form-group">
+					<p>Do you have a Partner? <span class="symbol">*</span></p>
+					<select name="Partner" required="required">
+						<option value="" disabled selected hidden>Select option</option>
+						<option value="Yes">Yes</option>
+						<option value="No">No</option>
+					</select>
+				</div>
 
+				<div class="form-group">
+					<p>Do you have Dependents? <span class="symbol">*</span></p>
+					<select name="Dependents" required="required">
+						<option value="" disabled selected hidden>Select option</option>
+						<option value="Yes">Yes</option>
+						<option value="No">No</option>
+					</select>
+				</div>
+			</fieldset>
 
+			<fieldset>
+				<legend>Contract & Billing Information</legend>
+				<div class="form-group">
+					<p>Choose Contract Type:<span class="symbol">*</span></p>
+					<select name="Contract" required="required">
+						<option value="" disabled selected hidden>Select option</option>
+						<option value="One year">One year</option>
+						<option value="Two year">Two year</option>
+						<option value="Month to month">Month-to-month</option>
+					</select>
+				</div>
 
+				<div class="form-group">
+					<p>Do you prefer Paperless Billing? <span class="symbol">*</span></p>
+					<select name="Paperless Billing" required="required">
+						<option value="" disabled selected hidden>Select option</option>
+						<option value="Yes">Yes</option>
+						<option value="No">No</option>
+					</select>
+				</div>
 
+				<div class="form-group">
+					<p>Preferred Payment Method: <span class="symbol">*</span></p>
+					<select name="Payment Method" required="required">
+						<option value="" disabled selected hidden>Select option</option>
+						<option value="Credit card automatic">Credit card (automatic)</option>
+						<option value="Bank transfer automatic">Bank transfer (automatic)</option>
+						<option value="Electronic check">Electronic check</option>
+						<option value="Mailed check">Mailed check</option>
+					</select>
+				</div>
 
-
-					<div class="form-group">
-						<p>Do you have a Partner? <span class="symbol">*</span></p>
-						<select name="Partner" required="required">
-							<option value="" disabled selected hidden>Select option</option>
-							<option value="Yes">Yes</option>
-							<option value="No">No</option>
-						</select>
-					</div>
-
-					<div class="form-group">
-						<p>Do you have Dependents? <span class="symbol">*</span></p>
-						<select name="Dependents" required="required">
-							<option value="" disabled selected hidden>Select option</option>
-							<option value="Yes">Yes</option>
-							<option value="No">No</option>
-						</select>
-					</div>
-				</fieldset>
-
-				<fieldset>
-					<legend>Contract & Billing Information</legend>
-					<div class="form-group">
-						<p>Choose Contract Type:<span class="symbol">*</span></p>
-						<select name="Contract" required="required">
-							<option value="" disabled selected hidden>Select option</option>
-							<option value="One year">One year</option>
-							<option value="Two year">Two year</option>
-							<option value="Month to month">Month-to-month</option>
-						</select>
-					</div>
-
-					<div class="form-group">
-						<p>Do you prefer Paperless Billing? <span class="symbol">*</span></p>
-						<select name="Paperless Billing" required="required">
-							<option value="" disabled selected hidden>Select option</option>
-							<option value="Yes">Yes</option>
-							<option value="No">No</option>
-						</select>
-					</div>
-
-					<div class="form-group">
-						<p>Preferred Payment Method: <span class="symbol">*</span></p>
-						<select name="Payment Method" required="required">
-							<option value="" disabled selected hidden>Select option</option>
-							<option value="Credit card automatic">Credit card (automatic)</option>
-							<option value="Bank transfer automatic">Bank transfer (automatic)</option>
-							<option value="Electronic check">Electronic check</option>
-							<option value="Mailed check">Mailed check</option>
-						</select>
-					</div>
-
-					<div class="form-group">
-						<p>Monthly Charges ($): <span class="symbol">*</span></p>
-						<input name="Monthly Charges" type="number" required="required">
-					</div>
+				<div class="form-group">
+					<p>Monthly Charges ($): <span class="symbol">*</span></p>
+					<input name="Monthly Charges" type="number" required="required">
+				</div>
 
 
 
-					<div class="form-group">
-						<p>Total Charges ($): <span class="symbol">*</span></p>
-						<input name="Total Charges" type="number" required="required">
-					</div>
-				</fieldset>
+				<div class="form-group">
+					<p>Total Charges ($): <span class="symbol">*</span></p>
+					<input name="Total Charges" type="number" required="required">
+				</div>
+			</fieldset>
 
-				<fieldset class="section2">
-					<legend>Duration of Service</legend>
-					<div class="form-group">
-						<p>How many months have you been with us?<span class="symbol">*</span></p>
-						<input name="Tenure" type="number" required="required">
-					</div>
-				</fieldset>
+			<fieldset class="section2">
+				<legend>Duration of Service</legend>
+				<div class="form-group">
+					<p>How many months have you been with us?<span class="symbol">*</span></p>
+					<input name="Tenure" type="number" required="required">
+				</div>
+
+
+			</fieldset>
+
+
+			<legend>Service Information:</legend>
+			<div class="form-group">
+				<p>Do you have Phone Service? <span class="symbol">*</span></p>
+				<select name="Phone Service" required="required">
+					<option value="" disabled selected hidden>Select option</option>
+					<option value="Yes">Yes</option>
+					<option value="No">No</option>
+				</select>
 			</div>
 
-			<div class="rightsection">
-				<fieldset>
-					<legend>Service Information</legend>
-					<div class="form-group">
-						<p>Do you have Phone Service? <span class="symbol">*</span></p>
-						<select name="Phone Service" required="required">
-							<option value="" disabled selected hidden>Select option</option>
-							<option value="Yes">Yes</option>
-							<option value="No">No</option>
-						</select>
-					</div>
-
-					<div class="form-group">
-						<p>Do you have Multiple Lines? <span class="symbol">*</span></p>
-						<select name="Multiple Lines" required="required">
-							<option value="" disabled selected hidden>Select option</option>
-							<option value="Yes">Yes</option>
-							<option value="No">No</option>
-							<option value="No phone service">I don't have phone service</option>
-						</select>
-					</div>
-
-					<div class="form-group">
-						<p>What type of Internet Service do you have? <span class="symbol">*</span></p>
-						<select name="Internet Service" required="required">
-							<option value="" disabled selected hidden>Select option</option>
-							<option value="Fiber optic">Fiber optic</option>
-							<option value="DSL">Digital Subscriber Line (DSL)</option>
-							<option value="No">I don't have internet service</option>
-						</select>
-					</div>
-
-					<div class="form-group">
-						<p>Do you have Online Security? <span class="symbol">*</span></p>
-						<select name="Online Security" required="required">
-							<option value="" disabled selected hidden>Select option</option>
-							<option value="Yes">Yes</option>
-							<option value="No">No</option>
-							<option value="No internet service">I don't have internet service</option>
-						</select>
-					</div>
-
-					<div class="form-group">
-						<p>Do you have Online Backup? <span class="symbol">*</span></p>
-						<select name="Online Backup" required="required">
-							<option value="" disabled selected hidden>Select option</option>
-							<option value="Yes">Yes</option>
-							<option value="No">No</option>
-							<option value="No internet service">I don't have internet service</option>
-						</select>
-					</div>
-
-					<div class="form-group">
-						<p>Do you have Device Protection? <span class="symbol">*</span></p>
-						<select name="Device Protection" required="required">
-							<option value="" disabled selected hidden>Select option</option>
-							<option value="Yes">Yes</option>
-							<option value="No">No</option>
-							<option value="No internet service">I don't have internet service</option>
-						</select>
-					</div>
-
-					<div class="form-group">
-						<p>Do you have Tech Support? <span class="symbol">*</span></p>
-						<select name="Tech Support" required="required">
-							<option value="" disabled selected hidden>Select option</option>
-							<option value="Yes">Yes</option>
-							<option value="No">No</option>
-							<option value="No internet service">I don't have internet service</option>
-						</select>
-					</div>
-
-					<div class="form-group">
-						<p>Do you have a Streaming TV subscription?<span class="symbol">*</span></p>
-						<select name="Streaming TV" required="required">
-							<option value="" disabled selected hidden>Select option</option>
-							<option value="Yes">Yes</option>
-							<option value="No">No</option>
-							<option value="No internet service">I don't have internet service</option>
-						</select>
-					</div>
-
-					<div class="form-group">
-						<p>Do you have Streaming Movies subscription? <span class="symbol">*</span></p>
-						<select name="Streaming Movies" required="required">
-							<option value="" disabled selected hidden>Select option</option>
-							<option value="Yes">Yes</option>
-							<option value="No">No</option>
-							<option value="No internet service">I don't have internet service</option>
-						</select>
-					</div>
-				</fieldset>
-
-
+			<div class="form-group">
+				<p>Do you have Multiple Lines? <span class="symbol">*</span></p>
+				<select name="Multiple Lines" required="required">
+					<option value="" disabled selected hidden>Select option</option>
+					<option value="Yes">Yes</option>
+					<option value="No">No</option>
+					<option value="No phone service">I don't have phone service</option>
+				</select>
 			</div>
-			<br><br>
-			<div class="button">
-				<button type="submit " class="btn">Predict </button>
+
+			<div class="form-group">
+				<p>What type of Internet Service do you have? <span class="symbol">*</span></p>
+				<select name="Internet Service" required="required">
+					<option value="" disabled selected hidden>Select option</option>
+					<option value="Fiber optic">Fiber optic</option>
+					<option value="DSL">Digital Subscriber Line (DSL)</option>
+					<option value="No">I don't have internet service</option>
+				</select>
 			</div>
-			<br>
-			<div id="infoDisplay" style="font-size: 18px;"></div>
+
+			<div class="form-group">
+				<p>Do you have Online Security? <span class="symbol">*</span></p>
+				<select name="Online Security" required="required">
+					<option value="" disabled selected hidden>Select option</option>
+					<option value="Yes">Yes</option>
+					<option value="No">No</option>
+					<option value="No internet service">I don't have internet service</option>
+				</select>
+			</div>
+
+			<div class="form-group">
+				<p>Do you have Online Backup? <span class="symbol">*</span></p>
+				<select name="Online Backup" required="required">
+					<option value="" disabled selected hidden>Select option</option>
+					<option value="Yes">Yes</option>
+					<option value="No">No</option>
+					<option value="No internet service">I don't have internet service</option>
+				</select>
+			</div>
+
+			<div class="form-group">
+				<p>Do you have Device Protection? <span class="symbol">*</span></p>
+				<select name="Device Protection" required="required">
+					<option value="" disabled selected hidden>Select option</option>
+					<option value="Yes">Yes</option>
+					<option value="No">No</option>
+					<option value="No internet service">I don't have internet service</option>
+				</select>
+			</div>
+
+			<div class="form-group">
+				<p>Do you have Tech Support? <span class="symbol">*</span></p>
+				<select name="Tech Support" required="required">
+					<option value="" disabled selected hidden>Select option</option>
+					<option value="Yes">Yes</option>
+					<option value="No">No</option>
+					<option value="No internet service">I don't have internet service</option>
+				</select>
+			</div>
+
+			<div class="form-group">
+				<p>Do you have a Streaming TV subscription?<span class="symbol">*</span></p>
+				<select name="Streaming TV" required="required">
+					<option value="" disabled selected hidden>Select option</option>
+					<option value="Yes">Yes</option>
+					<option value="No">No</option>
+					<option value="No internet service">I don't have internet service</option>
+				</select>
+			</div>
+
+			<div class="form-group">
+				<p>Do you have Streaming Movies subscription? <span class="symbol">*</span></p>
+				<select name="Streaming Movies" required="required">
+					<option value="" disabled selected hidden>Select option</option>
+					<option value="Yes">Yes</option>
+					<option value="No">No</option>
+					<option value="No internet service">I don't have internet service</option>
+				</select>
+			</div>
+
 		</form>
+
+	</div>
+	<br><br>
+	<div class="button">
+		<button type="submit " class="btn">Predict </button>
+	</div>
+	<br>
+	<div id="infoDisplay" style="font-size: 18px;"></div>
+	</form>
 	</div>
 
 
