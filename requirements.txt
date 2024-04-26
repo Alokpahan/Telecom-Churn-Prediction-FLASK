@@ -1,5 +1,5 @@
 ﻿Flask == 2.2.2
-request
+requests
 render_template
 gunicorn
 pickle
