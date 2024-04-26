@@ -1,6 +1,4 @@
 ﻿Flask == 2.2.2
-requests
-render_template
 gunicorn
 pickle
 numpy
