@@ -1,0 +1,9 @@
+
+flask
+Flask
+request
+render_template
+gunicorn
+pickle
+numpy
+scikit-learn
